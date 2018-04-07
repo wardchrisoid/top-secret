@@ -147,8 +147,7 @@ int main()
     }
     stackList.push(token);
     stackList.display();
-    //DEBUG:
-    cout<< "HEEEEEEEE" << endl;
+
     stackList.pop(stackList.getTail());
     stackList.pop(stackList.getTail());
     stackList.pop(stackList.getTail());
