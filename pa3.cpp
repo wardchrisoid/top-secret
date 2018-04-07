@@ -8,7 +8,8 @@
 
 using namespace std;
 
-string category(string tokenName){
+string category(string tokenName)
+{
     return "";
 }
 
@@ -74,7 +75,7 @@ node *List::getTail()
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//TODO: use vector instead of array for elegance
+//TODO: wtf????
 // void print(char token[])
 // {
 
@@ -83,13 +84,31 @@ node *List::getTail()
 //         printf("%3d ", token[k]);
 //     }
 // }
+void List::catagorizer(vector<string> &keywords,
+    vector<string> &identifier,
+    vector<string> &constant,
+    vector<string> &operatros, //DEBUG: this is a meme
+    vector<string> &delimiter,
+    vector<string> &syntaxError)
+{
+}
+
 int main()
 {
-    
+
     cout << "please enter the name of the .txt file: " << endl;
     List stackList;
     //TODO: figure out a way to use a vector in this and future main functions for elegance
     char filename[100];
+
+    //Creates 2d vector for catagorization
+    vector<string> keywords;
+    vector<string> identifier;
+    vector<string> constant;
+    vector<string> operatros; //DEBUG: this is a meme
+    vector<string> delimiter;
+    vector<string> syntaxError;
+
     ifstream file;
     cin.getline(filename, 100);
     file.open(filename);
@@ -103,16 +122,13 @@ int main()
     file >> token;
     while (file.good())
     {
-      //  cout << token << " ";
+        //  cout << token << " ";
         stackList.push(token);
         file >> token;
-
-        
     }
     stackList.push(token);
+    //DEBUG:
     stackList.display();
-    //Print function
-    // print(token);
 
     system("pause");
     return 0;
