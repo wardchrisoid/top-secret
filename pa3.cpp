@@ -104,6 +104,7 @@ int main()
     //Print function
     print(token);
 
+//check this out
     system("pause");
     return 0;
 }
