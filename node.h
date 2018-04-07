@@ -8,9 +8,9 @@ using namespace std;
 struct node //Create member variables for a node structure
 {
 
-    string tokenName; //Name of program using node
-    string category;
-    node *next;      //Pointer to next node
+    string input;     //name of token identified
+    string category;  //category of the token TODO: is this used? dan
+    node *next;       //Pointer to next node
 };
 
 class nodeInfo
@@ -37,9 +37,9 @@ class List //Class for linked list
         head = NULL;
         tail = NULL;
     }
-    void push(string tokenName); //Create new node in list
+    void push(string input); //Create new node in list
     //TODO: make that pussi POP
-    void pop(node * tail); //delete node in the list
+    node* pop(); //delete node in the list
 
 
     void display();                                           //Iterates through linked list and displays the programs per page
