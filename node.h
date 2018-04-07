@@ -39,11 +39,15 @@ class List //Class for linked list
     }
     void push(string tokenName); //Create new node in list
     //TODO: make that pussi POP
+    void pop(node * tail); //delete node in the list
+
+
     void display();                                           //Iterates through linked list and displays the programs per page
     node *getHead();
     node *getTail();
     //TODO: catagorizer
-    void catagorizer(vector<string> &keywords,
+    void catagorizer(List stackList, 
+    vector<string> &keywords,
     vector<string> &identifier,
     vector<string> &constant,
     vector<string> &operatros, //DEBUG: this is a meme

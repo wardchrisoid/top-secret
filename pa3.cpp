@@ -13,6 +13,26 @@ string category(string tokenName)
     return "";
 }
 
+
+void List::pop(node * tail) //maybe add a "&" to the tail?
+{
+
+    node *curr=new node;
+    node *prev=new node;
+    curr = head;
+    while (curr->next != NULL)
+    {
+        prev = curr;
+        curr = curr->next;
+    }
+    tail = prev;
+    prev->next=NULL;
+    delete curr;
+
+  //  int value = 0; 
+  //  tail->tokenName = "";
+  //  tail->category = "";
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //nodeInfo method definitions
 nodeInfo::nodeInfo(node *nodePtr, int count) //Constructor
@@ -53,18 +73,15 @@ void List::display() //Iterates through linked list and displays the programs pe
 {
     node *temp = new node;
     temp = head;
-    int i = 0;
-    for (int row = 0; row <= 4; row++)
-    {
-        for (int column = 0; column <= 8; column++)
-        {
-            cout << temp->tokenName << "\t";
-            temp = temp->next;
-            i++;
-        }
-        cout << '\n';
+    while(temp!=nullptr){
+
+        cout << temp->tokenName << "\t";
+        temp = temp->next;
     }
+    
+    return;
 }
+
 node *List::getHead()
 {
     return head;
@@ -84,13 +101,15 @@ node *List::getTail()
 //         printf("%3d ", token[k]);
 //     }
 // }
-void List::catagorizer(vector<string> &keywords,
+void List::catagorizer(List stackList, 
+    vector<string> &keywords,
     vector<string> &identifier,
     vector<string> &constant,
     vector<string> &operatros, //DEBUG: this is a meme
     vector<string> &delimiter,
     vector<string> &syntaxError)
 {
+
 }
 
 int main()
@@ -127,7 +146,12 @@ int main()
         file >> token;
     }
     stackList.push(token);
+    stackList.display();
     //DEBUG:
+    cout<< "HEEEEEEEE" << endl;
+    stackList.pop(stackList.getTail());
+    stackList.pop(stackList.getTail());
+    stackList.pop(stackList.getTail());
     stackList.display();
 
     system("pause");
