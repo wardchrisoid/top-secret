@@ -1,0 +1,12 @@
+{
+    "git.ignoreMissingGitWarning": true,
+    "git.autofetch": true,
+    "workbench.colorTheme": "Material Night Eighties",
+    "todohighlight.keywords": [
+    {
+        "text": "DEBUG:",
+        "color": "white",
+        "backgroundColor": "#930e0e",
+    },
+    ],
+}
