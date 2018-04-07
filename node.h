@@ -6,9 +6,9 @@ using namespace std;
 
 struct node //Create member variables for a node structure
 {
-    int index;       //Index of node
-    bool isFree;     //Whether node is allocated or not
-    string progName; //Name of program using node
+
+    string tokenName; //Name of program using node
+    string category;
     node *next;      //Pointer to next node
 };
 
@@ -36,7 +36,7 @@ class List //Class for linked list
         head = NULL;
         tail = NULL;
     }
-    void createNode(bool isFree, string progName, int index); //Create new node in list
+    void push(string tokenName); //Create new node in list
     void display();                                           //Iterates through linked list and displays the programs per page
     node *getHead();
     node *getTail();

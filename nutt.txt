@@ -1,3 +1,7 @@
-Nut in the nutshack
-Butt in the buttcrack
-Yuh
+FOR (i, 10, ++)
+BEGIN
+FOR (j, 10, ++)
+BEGAN
+sum=sum + i + j;
+END
+END

@@ -8,6 +8,10 @@
 
 using namespace std;
 
+string category(string tokenName){
+    return "";
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //nodeInfo method definitions
 nodeInfo::nodeInfo(node *nodePtr, int count) //Constructor
@@ -26,12 +30,11 @@ node *nodeInfo::getPointer()
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //List  method definitions
-void List::createNode(bool isFree, string progName, int index) //Create new node in list
+void List::push(string tokenName) //Create new node in list
 {
+
     node *created = new node; //Initialize new node and its variables
-    created->progName = progName;
-    created->isFree = isFree;
-    created->index = index;
+    created->tokenName = tokenName;
 
     if (head == NULL) //Check if list has been started yet
     {
@@ -50,11 +53,11 @@ void List::display() //Iterates through linked list and displays the programs pe
     node *temp = new node;
     temp = head;
     int i = 0;
-    for (int row = 1; row <= 4; row++)
+    for (int row = 0; row <= 4; row++)
     {
-        for (int column = 1; column <= 8; column++)
+        for (int column = 0; column <= 8; column++)
         {
-            cout << temp->progName << "\t";
+            cout << temp->tokenName << "\t";
             temp = temp->next;
             i++;
         }
@@ -72,16 +75,19 @@ node *List::getTail()
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //TODO: use vector instead of array for elegance
-void print(char token[])
-{
+// void print(char token[])
+// {
 
-    for (unsigned int k = 0; k < (sizeof(token) / sizeof(token[0])); k++)
-    {
-        printf("%3d ", token[k]);
-    }
-}
+//     for (unsigned int k = 0; k < (sizeof(token) / sizeof(token[0])); k++)
+//     {
+//         printf("%3d ", token[k]);
+//     }
+// }
 int main()
 {
+    
+    cout << "please enter the name of the .txt file: " << endl;
+    List stackList;
     //TODO: figure out a way to use a vector in this and future main functions for elegance
     char filename[100];
     ifstream file;
@@ -95,16 +101,19 @@ int main()
 
     char token[100];
     file >> token;
-    for (unsigned int i = 0; i < (sizeof(token) / sizeof(token[0])); i++)
+    while (file.good())
     {
-        cout << token << " ";
+      //  cout << token << " ";
+        stackList.push(token);
         file >> token;
+
+        
     }
-
+    stackList.push(token);
+    stackList.display();
     //Print function
-    print(token);
+    // print(token);
 
-//check this out
     system("pause");
     return 0;
 }
