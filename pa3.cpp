@@ -142,23 +142,23 @@ void List::catagorizer(List stackList,
             {
                 if (isupper(input[i]) != 0)
                 {
-                //DEBUG:
-                    cout<<"UPPER SCREAM"<<endl;
+                    //DEBUG:
+                    cout << "UPPER SCREAM" << endl;
                     temp = input[i];
                     stringBuildin = true;
                     upper = true;
-                     cout<<"UPPER SCREAM"<<endl;
+                    cout << "UPPER SCREAM" << endl;
                 }
                 else if (islower(input[i]) != 0)
                 {
-                 cout<<"LOWER SCREAM"<<endl;
+                    cout << "LOWER SCREAM" << endl;
                     temp = input[i];
                     stringBuildin = true;
                     lower = true;
                 }
                 else if (isdigit(input[i]) != 0)
                 {
-                cout<<"DIGIT SCREAM"<<endl;
+                    cout << "DIGIT SCREAM" << endl;
 
                     temp = input[i];
                     stringBuildin = true;
@@ -166,7 +166,7 @@ void List::catagorizer(List stackList,
                 }
                 else if (ispunct(input[i]) != 0)
                 {
-                cout<<"OTHER SCREAM"<<endl;
+                    cout << "OTHER SCREAM" << endl;
 
                     temp = input[i];
                     stringBuildin = true;
@@ -179,29 +179,37 @@ void List::catagorizer(List stackList,
                     }
                 }
             }
-            else if(stringBuildin)
+            else if (stringBuildin)
             {
                 if (upper)
                 {
                     //DEBUG:
-                    cout<<"IF UPPER ACCESS SCREAM"<<endl;
-                    if (isupper(input[i]) != 0)
+                   // cout << "IF UPPER ACCESS SCREAM" << endl;
+                   // cout << "input[i] is " << input[i] << endl;
+                   // cout << "i is " << i << endl;
+                    //cout << "input.size() is " << input.size() << endl;
+                    if (i == input.size()-1)
+                    {
+                        cout << "FUCK YOU MOM" << endl;
+                        temp += input[i];
+                        keywords.push_back(temp);
+                        stringBuildin = false;
+                        upper = false;
+                    }
+                    else if (isupper(input[i]) != 0)
                     {
                         temp += input[i];
                         //DEBUG:
-                        cout<<"TEMP String: " << temp <<endl;
+                        cout << "TEMP String: " << temp << endl;
                     }
                     else
                     {
                         //DEBUG:
-                        cout<<"FUCK YOU DAD" <<endl;
-                       keywords.push_back(temp);
-                       stringBuildin = false;
-                       upper = false;
-
+                        cout << "FUCK YOU DAD" << endl;
+                        keywords.push_back(temp);
+                        stringBuildin = false;
+                        upper = false;
                     }
-
-
                 }
                 else if (islower(input[i]) != 0)
                 {
@@ -223,10 +231,9 @@ void List::catagorizer(List stackList,
         input = stackList.pop()->input;
         //cout << "tail->input is " << tail->input << endl;
 
-        //input = tail->input; 
+        //input = tail->input;
         //DEBUG:
         cout << ++j << endl;
-
     }
     //Parse token
     //Distribute strings to proper category vector
@@ -275,12 +282,12 @@ int main()
     stackList.catagorizer(stackList, keywords, identifier, constant, operatros,
                           delimiter, syntaxError);
 
-
-
-    /*for(int i = 0; i< keywords.size()-1;i++)
-        {
-            cout<<keywords<<endl; 
-        }*/
+    for (unsigned int i = 0; i <= (keywords.size()-1); i++)
+    {
+        //DEBUG:
+        cout << "keywords.size()-1 is " << (keywords.size()) << endl;
+        cout << "keywords[i] is " << keywords[i] << endl;
+    }
 
     system("pause");
     return 0;
