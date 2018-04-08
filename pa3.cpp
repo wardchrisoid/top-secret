@@ -3,33 +3,11 @@
 #include <string>
 #include "node.h"
 #include <vector>
-#include <cstdlib>
+//#include <cstdlib>
 #include <fstream>
-#include <ctype.h>
+//#include <ctype.h>
 
 using namespace std;
-
-//TODO: what is this?
-string category(string input)
-{
-    return "";
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//nodeInfo method definitions
-nodeInfo::nodeInfo(node *nodePtr, int count) //Constructor
-{
-    this->nodePtr = nodePtr;
-    this->count = count;
-}
-int nodeInfo::getCount()
-{
-    return count;
-}
-node *nodeInfo::getPointer()
-{
-    return nodePtr;
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //List  method definitions
@@ -111,11 +89,13 @@ void List::catagorizer(List stackList,
     //Start from the tail
     //input is string to be parsed
     string input = tail->input;
+    
     //token identified
     string token;
 
     //DEBUG:
     int j = 0;
+    string inputChecker = "";
     //
     bool stringBuildin = false;
     bool upper = false;
@@ -124,6 +104,7 @@ void List::catagorizer(List stackList,
     bool punct = false;
     bool paren = false;
     string temp = "";
+    int inputLength = -99;
 
     while (input.size() > 0)
     {
@@ -133,11 +114,14 @@ void List::catagorizer(List stackList,
         digit = false;
         punct = false;
         paren = false;
-        temp = "";
-        for (unsigned int i = 0; i <= (input.size() - 1); i++)
+        temp = "";                                 
+        inputLength = (input.length()-1);
+        for (int i = 0; i <= inputLength; i++)
         {
             //DEBUG:
+            inputChecker = input[i];
             cout << "input i is " << input[i] << endl;
+            //
             if (!stringBuildin)
             {
                 if (isupper(input[i]) != 0)
@@ -147,7 +131,6 @@ void List::catagorizer(List stackList,
                     temp = input[i];
                     stringBuildin = true;
                     upper = true;
-                    cout << "UPPER SCREAM" << endl;
                 }
                 else if (islower(input[i]) != 0)
                 {
@@ -184,14 +167,16 @@ void List::catagorizer(List stackList,
                 if (upper)
                 {
                     //DEBUG:
-                   // cout << "IF UPPER ACCESS SCREAM" << endl;
-                   // cout << "input[i] is " << input[i] << endl;
-                   // cout << "i is " << i << endl;
-                    //cout << "input.size() is " << input.size() << endl;
-                    if (i == input.size()-1)
+                    cout << "input[i] is " << input[i] << endl;
+                    cout << "i is " << i << endl;
+                    cout << "input.size() is " << input.size() << endl;
+                    //
+                    if (i == inputLength)
                     {
-                        cout << "FUCK YOU MOM" << endl;
                         temp += input[i];
+                        //DEBUG:
+                        cout << "Entering into keywords. Temp = " << temp << endl;
+                        //
                         keywords.push_back(temp);
                         stringBuildin = false;
                         upper = false;
@@ -199,20 +184,42 @@ void List::catagorizer(List stackList,
                     else if (isupper(input[i]) != 0)
                     {
                         temp += input[i];
-                        //DEBUG:
-                        cout << "TEMP String: " << temp << endl;
                     }
                     else
                     {
                         //DEBUG:
-                        cout << "FUCK YOU DAD" << endl;
+                        cout << "Entering into keywords. Temp = " << temp << endl;
+                        //
                         keywords.push_back(temp);
                         stringBuildin = false;
                         upper = false;
                     }
                 }
-                else if (islower(input[i]) != 0)
+                else if (lower)
                 {
+                    if (i == inputLength)
+                    {
+                        temp += input[i];
+                        //DEBUG:
+                        cout << "Entering into identifier. Temp = " << temp << endl;
+                        //
+                        identifier.push_back(temp);
+                        stringBuildin = false;
+                        lower = false;
+                    }
+                    else if (islower(input[i]) != 0)
+                    {
+                        temp += input[i];
+                    }
+                    else
+                    {
+                        //DEBUG:
+                        cout << "Entering into identifier. Temp = " << temp << endl;
+                        //
+                        identifier.push_back(temp);
+                        stringBuildin = false;
+                        lower = false;
+                    }
                 }
                 else if (isdigit(input[i]) != 0)
                 {
@@ -227,19 +234,14 @@ void List::catagorizer(List stackList,
             }
         }
 
-        //DEBUG: remove print and ->input
+        //Pops from stack, and changes input to top of stack input
         input = stackList.pop()->input;
-        //cout << "tail->input is " << tail->input << endl;
 
-        //input = tail->input;
         //DEBUG:
-        cout << "input is " << input << endl;
         cout << "run #" << ++j << endl;
-        //cout << head 
+        cout << "input is " << input << endl;
+        //
     }
-    //Parse token
-    //Distribute strings to proper category vector
-    //Pop and start over
 }
 
 int main()
@@ -285,12 +287,20 @@ int main()
                           delimiter, syntaxError);
 
     cout << "keywords.size() is " << (keywords.size()) << endl;
-    for (unsigned int i = 0; i <= (keywords.size()-1); i++)
+    for (unsigned int i = 0; i <= (keywords.size() - 1); i++)
     {
         //DEBUG:
         cout << "keywords[i] is " << keywords[i] << endl;
+        //
     }
 
+    cout << "identifier.size() is " << (identifier.size()) << endl;
+    for (unsigned int i = 0; i <= (identifier.size() - 1); i++)
+    {
+        //DEBUG:
+        cout << "identifier[i] is " << identifier[i] << endl;
+        //
+    }
     //system("pause");
     return 0;
 }
