@@ -37,7 +37,7 @@ void List::push(string input) //Create new node in list
 
     node *created = new node; //Initialize new node and its variables
     created->input = input;
-
+    created->next=NULL;
     if (head == NULL) //Check if list has been started yet
     {
         head = created; //If not, set head and tail equal to the new node
