@@ -125,7 +125,7 @@ void List::catagorizer(List stackList,
     bool paren = false;
     string temp = "";
 
-    while (head->next != NULL)
+    while (input.size() > 0)
     {
         stringBuildin = false;
         upper = false;
@@ -233,7 +233,9 @@ void List::catagorizer(List stackList,
 
         //input = tail->input;
         //DEBUG:
-        cout << ++j << endl;
+        cout << "input is " << input << endl;
+        cout << "run #" << ++j << endl;
+        //cout << head 
     }
     //Parse token
     //Distribute strings to proper category vector
@@ -282,13 +284,13 @@ int main()
     stackList.catagorizer(stackList, keywords, identifier, constant, operatros,
                           delimiter, syntaxError);
 
+    cout << "keywords.size() is " << (keywords.size()) << endl;
     for (unsigned int i = 0; i <= (keywords.size()-1); i++)
     {
         //DEBUG:
-        cout << "keywords.size()-1 is " << (keywords.size()) << endl;
         cout << "keywords[i] is " << keywords[i] << endl;
     }
 
-    system("pause");
+    //system("pause");
     return 0;
 }
