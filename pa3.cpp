@@ -5,6 +5,7 @@
 #include <vector>
 #include <cstdlib>
 #include <fstream>
+#include <ctype.h>
 
 using namespace std;
 
@@ -124,6 +125,31 @@ void List::catagorizer(List stackList,
             //DEBUG:
             cout << "input i is " << input[i] << endl;
 
+            if (isupper(input[i]) != 0)
+            {
+                //DEBUG: poopsie pie
+                cout << "issa UPPER UP YOUR MUMS BUM" << endl;
+            }
+            else if (islower(input[i]) != 0)
+            {
+                //DEBUG:
+                cout << "issa LOWER IN YOUR LEAF BLOWER" << endl;
+            }
+            else if (isdigit(input[i]) != 0)
+            {
+                //DEBUG:
+                cout << "number bitch?" << endl;
+            }
+            else if (ispunct(input[i]) != 0)
+            {
+                //DEBUG:
+                cout << "dots n lines n shit no alphanum" << endl;
+                if (input[i] == '(' || input[i] == ')')
+                {
+                     //DEBUG:
+                     cout << "parentheses y0000" << endl;
+                }
+            }
         }
         
         //DEBUG: remove print and ->input
