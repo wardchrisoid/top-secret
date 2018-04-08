@@ -19,5 +19,5 @@ node* nodeInfo::getPointer()
 {
     return nodePtr;
 }
-}
+
 ;
