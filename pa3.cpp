@@ -38,7 +38,7 @@ void List::push(string input) //Create new node in list
 
     node *created = new node; //Initialize new node and its variables
     created->input = input;
-    created->next=NULL;
+    created->next = NULL;
     if (head == NULL) //Check if list has been started yet
     {
         head = created; //If not, set head and tail equal to the new node
@@ -51,7 +51,7 @@ void List::push(string input) //Create new node in list
         tail = created;
     }
 }
-node* List::pop() //maybe add a "&" to the tail?
+node *List::pop() //maybe add a "&" to the tail?
 {
 
     node *curr = new node;
@@ -116,49 +116,117 @@ void List::catagorizer(List stackList,
 
     //DEBUG:
     int j = 0;
+    //
+    bool stringBuildin = false;
+    bool upper = false;
+    bool lower = false;
+    bool digit = false;
+    bool punct = false;
+    bool paren = false;
+    string temp = "";
 
     while (head->next != NULL)
     {
-        cout << ++j << endl;
+        stringBuildin = false;
+        upper = false;
+        lower = false;
+        digit = false;
+        punct = false;
+        paren = false;
+        temp = "";
         for (unsigned int i = 0; i <= (input.size() - 1); i++)
         {
             //DEBUG:
             cout << "input i is " << input[i] << endl;
-
-            if (isupper(input[i]) != 0)
+            if (!stringBuildin)
             {
-                //DEBUG: poopsie pie
-                cout << "issa UPPER UP YOUR MUMS BUM" << endl;
-            }
-            else if (islower(input[i]) != 0)
-            {
-                //DEBUG:
-                cout << "issa LOWER IN YOUR LEAF BLOWER" << endl;
-            }
-            else if (isdigit(input[i]) != 0)
-            {
-                //DEBUG:
-                cout << "number bitch?" << endl;
-            }
-            else if (ispunct(input[i]) != 0)
-            {
-                //DEBUG:
-                cout << "dots n lines n shit no alphanum" << endl;
-                if (input[i] == '(' || input[i] == ')')
+                if (isupper(input[i]) != 0)
                 {
-                     //DEBUG:
-                     cout << "parentheses y0000" << endl;
+                //DEBUG:
+                    cout<<"UPPER SCREAM"<<endl;
+                    temp = input[i];
+                    stringBuildin = true;
+                    upper = true;
+                     cout<<"UPPER SCREAM"<<endl;
+                }
+                else if (islower(input[i]) != 0)
+                {
+                 cout<<"LOWER SCREAM"<<endl;
+                    temp = input[i];
+                    stringBuildin = true;
+                    lower = true;
+                }
+                else if (isdigit(input[i]) != 0)
+                {
+                cout<<"DIGIT SCREAM"<<endl;
+
+                    temp = input[i];
+                    stringBuildin = true;
+                    digit = true;
+                }
+                else if (ispunct(input[i]) != 0)
+                {
+                cout<<"OTHER SCREAM"<<endl;
+
+                    temp = input[i];
+                    stringBuildin = true;
+                    punct = true;
+                    if (input[i] == '(' || input[i] == ')')
+                    {
+                        temp = input[i];
+                        paren = true;
+                        stringBuildin = true;
+                    }
+                }
+            }
+            else if(stringBuildin)
+            {
+                if (upper)
+                {
+                    //DEBUG:
+                    cout<<"IF UPPER ACCESS SCREAM"<<endl;
+                    if (isupper(input[i]) != 0)
+                    {
+                        temp += input[i];
+                        //DEBUG:
+                        cout<<"TEMP String: " << temp <<endl;
+                    }
+                    else
+                    {
+                        //DEBUG:
+                        cout<<"FUCK YOU DAD" <<endl;
+                       keywords.push_back(temp);
+                       stringBuildin = false;
+                       upper = false;
+
+                    }
+
+
+                }
+                else if (islower(input[i]) != 0)
+                {
+                }
+                else if (isdigit(input[i]) != 0)
+                {
+                }
+                else if (ispunct(input[i]) != 0)
+                {
+
+                    if (input[i] == '(' || input[i] == ')')
+                    {
+                    }
                 }
             }
         }
-        
+
         //DEBUG: remove print and ->input
         input = stackList.pop()->input;
         //cout << "tail->input is " << tail->input << endl;
 
-        //input = tail->input;
-         //DEBUG:
-        cout << j << endl;
+        //input = tail->input; 
+        //DEBUG:
+        cout << ++j << endl;
+
     }
     //Parse token
     //Distribute strings to proper category vector
@@ -206,6 +274,13 @@ int main()
     //
     stackList.catagorizer(stackList, keywords, identifier, constant, operatros,
                           delimiter, syntaxError);
+
+
+
+    /*for(int i = 0; i< keywords.size()-1;i++)
+        {
+            cout<<keywords<<endl; 
+        }*/
 
     system("pause");
     return 0;
