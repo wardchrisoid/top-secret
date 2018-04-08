@@ -123,12 +123,11 @@ void List::catagorizer(List stackList,
         {
             //DEBUG:
             cout << "input i is " << input[i] << endl;
+
         }
-         //DEBUG:
-        cout << j << endl;
-         //DEBUG:
-        cout << j << endl;
-        cout << "cat: prev is " << stackList.pop()->input << endl;
+        
+        //DEBUG: remove print and ->input
+        input = stackList.pop()->input;
         //cout << "tail->input is " << tail->input << endl;
 
         //input = tail->input;
